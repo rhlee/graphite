@@ -10,7 +10,10 @@
   const originals = {fetch: fetch, Request: Request};
 
   window.proxy = {
-    setFetch: _fetch => {window.fetch = _fetch;},
+    setFetch: _fetch => {window.fetch = (..._arguments) => {
+      _fetch(..._arguments);
+      originals.fetch(..._arguments);
+    };},
     Request: {}
   };
 
