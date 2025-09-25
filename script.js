@@ -8,7 +8,6 @@
   "use strict";
 
   const originals = {fetch: fetch, Request: Request};
-
   window.proxy = {
     setFetch: _fetch => {window.fetch = (..._arguments) => {
       _fetch(..._arguments);
@@ -16,9 +15,6 @@
     };},
     Request: {}
   };
-
   window.Request = new Proxy(Request, window.proxy.Request);
-  Object.setPrototypeOf(window.Request, originals.Request);
-  window.Request.prototype = originals.Request.prototype;
 })();
 
