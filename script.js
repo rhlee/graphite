@@ -7,11 +7,11 @@
 (() => {
   "use strict";
 
-  const originals = {fetch: fetch, Request: Request};
+  const originals = {fetch: fetch.bind(window), Request: Request};
   window.proxy = {
     setFetch: _fetch => {window.fetch = (..._arguments) => {
       _fetch(..._arguments);
-      originals.fetch(..._arguments);
+      return originals.fetch(..._arguments);
     };},
     Request: {}
   };
